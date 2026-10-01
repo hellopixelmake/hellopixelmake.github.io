@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Accredited courses and printable activity packs for curious kids, mapped to the AQA Unit Award Scheme. Instant download.">
+<title>Pixelmake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: white bands (nav, hero, subjects, how it works) alternating with the off-white ground.
+   Lowercase two-tone wordmark, pixel-grid motif, thin cobalt accent bars on cards. Light theme only, by choice. */
+:root{
+  --cobalt:#1B3DCC;
+  --cobalt-deep:#0D1F6E;
+  --cobalt-light:#3D5BE0;
+  --cobalt-pale:#E8EDFF;
+  --white:#FFFFFF;
+  --off-white:#F5F7FF;
+  --text:#0D1F6E;
+  --text-muted:#5E6EA9;
+  --display:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --body:"Inter",ui-sans-serif,system-ui,sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--off-white);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--cobalt)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--cobalt-light);outline-offset:3px}
+img,svg{max-width:100%}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-family:var(--display);color:var(--cobalt-deep);text-wrap:balance}
+.wrap{max-width:1100px;margin:0 auto;padding-inline:clamp(20px,4.5vw,48px)}
+.band{background:var(--white)}
+.divider{height:1px;background:var(--cobalt-pale)}
+.label{font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.label.cobalt{color:var(--cobalt)}
+.label.muted{color:var(--text-muted)}
+.muted{color:var(--text-muted)}
+
+/* wordmark */
+.wordmark{font-family:var(--display);font-weight:700;letter-spacing:-.04em;text-decoration:none;display:inline-flex;align-items:baseline;line-height:1}
+.wordmark .pixel{color:var(--cobalt)}
+.wordmark .make{color:var(--cobalt-deep)}
+
+/* nav */
+nav{border-bottom:1px solid var(--cobalt-pale)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px 32px;flex-wrap:wrap;padding-block:24px}
+nav .wordmark{font-size:22px}
+.nav-links{display:flex;gap:8px 32px;flex-wrap:wrap;list-style:none;margin:0;padding:0;font-family:var(--display);font-size:14px;font-weight:500;letter-spacing:.02em}
+.nav-links a{color:var(--text-muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--cobalt)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.01em;text-decoration:none;cursor:pointer;padding:13px 28px;border:1.5px solid var(--cobalt);line-height:1.2;transition:background .2s,color .2s}
+.btn.primary{background:var(--cobalt);color:var(--white)}
+.btn.primary:hover{background:var(--cobalt-deep);border-color:var(--cobalt-deep)}
+.btn.ghost{background:transparent;color:var(--cobalt)}
+.btn.ghost:hover{background:var(--cobalt-pale)}
+.btn.sm{font-size:14px;padding:10px 22px}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding-block:clamp(56px,8vw,96px) clamp(48px,7vw,80px)}
+.hero-title{font-size:clamp(38px,5vw,58px);font-weight:700;line-height:1.05;letter-spacing:-.03em;margin:20px 0 24px}
+.hero-title span{color:var(--cobalt)}
+.hero-body{color:var(--text-muted);line-height:1.7;max-width:440px;margin-bottom:36px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.hero-visual{display:flex;justify-content:center}
+.pixel-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;width:min(320px,100%);aspect-ratio:1;max-width:100%}
+.pixel-grid div{border-radius:2px}
+@media (max-width:760px){.hero .wrap{grid-template-columns:1fr;gap:40px}.pixel-grid{width:200px}.hero-visual{justify-content:flex-start}}
+
+/* subjects */
+.subjects .wrap{padding-block:44px}
+.subjects .label{margin-bottom:20px}
+.tags{display:flex;flex-wrap:wrap;gap:10px}
+.tag{font-family:var(--display);font-size:13px;font-weight:500;letter-spacing:.02em;padding:8px 16px;border:1.5px solid var(--cobalt-pale);color:var(--cobalt);background:var(--off-white)}
+.tag.filled{background:var(--cobalt);color:var(--white);border-color:var(--cobalt)}
+
+/* sections */
+section .wrap{padding-block:clamp(56px,7vw,80px)}
+.section-head{margin-bottom:36px;max-width:620px}
+.section-heading{font-size:28px;font-weight:700;letter-spacing:-.02em;margin:10px 0 8px}
+.section-sub{font-size:15px;color:var(--text-muted)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:900px){.grid3{grid-template-columns:1fr}}
+
+/* cards */
+.card{background:var(--white);border:1px solid var(--cobalt-pale);padding:32px;position:relative;display:flex;flex-direction:column;gap:14px;min-width:0}
+.card::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--cobalt)}
+.icon{width:36px;height:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.icon div{border-radius:1px;background:var(--cobalt-pale)}
+.icon div.on{background:var(--cobalt)}
+.card-title{font-size:18px;font-weight:600;letter-spacing:-.01em}
+.card-unit{font-size:13px;color:var(--text-muted)}
+.card-desc{font-size:14px;line-height:1.65;color:var(--text-muted)}
+.card ul{margin:0;padding:0;list-style:none;display:grid;gap:7px;font-size:13.5px;line-height:1.5;color:var(--text)}
+.card li{padding-left:16px;position:relative}
+.card li::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;background:var(--cobalt)}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badge{font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--cobalt);background:var(--cobalt-pale);padding:4px 10px}
+.badge.soon{background:var(--white);border:1px solid var(--cobalt-pale);color:var(--text-muted)}
+.buy{margin-top:auto;padding-top:18px;border-top:1px solid var(--cobalt-pale);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.price{font-family:var(--display);font-weight:700;font-size:22px;color:var(--cobalt-deep)}
+.price small{font-family:var(--body);font-weight:400;font-size:13px;color:var(--text-muted);margin-left:6px}
+
+/* packs */
+.packs{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:start}
+@media (max-width:900px){.packs{grid-template-columns:1fr}}
+.activities{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.activities div{padding:12px 14px;border:1px solid var(--cobalt-pale);background:var(--off-white);font-size:13px;line-height:1.5;color:var(--text-muted)}
+.activities strong{display:block;font-family:var(--display);font-size:14px;color:var(--cobalt-deep)}
+.pack-visual{background:var(--white);border:1px solid var(--cobalt-pale);aspect-ratio:4/3;max-width:100%;display:grid;place-items:center;padding:32px}
+.pack-visual .pixel-grid{width:min(220px,100%)}
+.more{margin-top:20px;font-size:14px;color:var(--text-muted)}
+
+/* library */
+.library-panel{background:var(--white);border:1px solid var(--cobalt-pale);display:grid;grid-template-columns:1.2fr .8fr;gap:40px;padding:clamp(28px,4vw,48px);position:relative}
+.library-panel::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--cobalt)}
+@media (max-width:900px){.library-panel{grid-template-columns:1fr}}
+.library-panel ul{margin:0;padding:0;list-style:none;display:grid;gap:9px;font-size:15px}
+.library-panel li{padding-left:18px;position:relative}
+.library-panel li::before{content:"";position:absolute;left:0;top:.6em;width:7px;height:7px;background:var(--cobalt)}
+.library-copy{display:grid;gap:18px}
+.plan{background:var(--cobalt-pale);padding:28px;display:grid;gap:12px;align-content:start}
+.plan .price{font-size:36px;color:var(--cobalt)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;counter-reset:step}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}}
+.step{display:grid;gap:8px;align-content:start;min-width:0}
+.step::before{counter-increment:step;content:counter(step,decimal-leading-zero);font-family:var(--display);font-weight:700;font-size:26px;color:var(--cobalt);line-height:1}
+.step h3{font-size:17px;font-weight:600;min-height:2.3em;letter-spacing:-.01em}
+.step p{font-size:14px;line-height:1.65;color:var(--text-muted)}
+.note{margin-top:36px;padding:18px 22px;background:var(--cobalt-pale);font-size:14.5px;line-height:1.65;max-width:62em}
+.note strong{color:var(--cobalt-deep)}
+
+/* faq */
+.faq{max-width:720px}
+details{border-top:1px solid var(--cobalt-pale)}
+details:last-of-type{border-bottom:1px solid var(--cobalt-pale)}
+summary{cursor:pointer;list-style:none;padding:16px 0;font-family:var(--display);font-weight:600;font-size:16px;color:var(--cobalt-deep);display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--cobalt);font-size:20px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{padding-bottom:18px;font-size:14.5px;color:var(--text-muted);max-width:60ch}
+.contact{margin-top:32px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.contact code{font-family:var(--body);font-size:15px;background:var(--white);border:1px solid var(--cobalt-pale);padding:9px 14px;user-select:all;color:var(--cobalt-deep)}
+
+/* lockup */
+.lockup{background:var(--cobalt-deep);text-align:center;padding-block:clamp(56px,8vw,80px)}
+.lockup .wordmark{font-size:clamp(56px,10vw,96px)}
+.lockup .pixel{color:var(--white)}
+.lockup .make{color:rgba(255,255,255,.45)}
+.lockup p{font-size:14px;color:rgba(255,255,255,.6);letter-spacing:.08em;text-transform:uppercase;margin-top:14px}
+
+/* footer */
+footer{background:var(--white);border-top:1px solid var(--cobalt-pale)}
+footer .wrap{padding-block:26px;display:grid;gap:10px;font-size:12px;color:var(--text-muted);font-family:var(--display)}
+footer .wordmark{font-size:16px}
+footer p{max-width:70em}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero-left>*{animation:rise .5s ease both}
+  .hero-left>*:nth-child(2){animation-delay:.06s}.hero-left>*:nth-child(3){animation-delay:.12s}.hero-left>*:nth-child(4){animation-delay:.18s}
+  @keyframes rise{from{opacity:.001;transform:translateY(8px)}to{opacity:1;transform:none}}
+}
+</style>
+
+</head>
+<body>
+<nav class="band" aria-label="Main">
+  <div class="wrap">
+    <a class="wordmark" href="#top"><span class="pixel">pixel</span><span class="make">make</span></a>
+    <ul class="nav-links">
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#packs">Packs</a></li>
+      <li><a href="#library">Library</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn primary sm" href="#courses">Browse courses</a>
+  </div>
+</nav>
+
+<main id="top">
+  <div class="hero band">
+    <div class="wrap">
+      <div class="hero-left">
+        <p class="label cobalt">Learning resources for curious kids</p>
+        <h1 class="hero-title">Build skills.<br><span>Pixel by pixel.</span></h1>
+        <p class="hero-body">Accredited courses and printable activity packs for ages 6–16. Business, engineering, gaming and art, made by a UK teacher for home educators, tutors and small learning centres.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#courses">Browse courses</a>
+          <a class="btn ghost" href="#packs">See the packs</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="pixel-grid"><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(236,75%,53%)"></div><div style="background:hsl(240,65%,57%)"></div><div style="background:hsl(244,70%,45%)"></div><div style="background:hsl(228,75%,49%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(244,65%,49%)"></div><div style="background:hsl(228,70%,53%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(240,70%,49%)"></div><div style="background:hsl(244,75%,53%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(232,70%,45%)"></div><div style="background:hsl(236,75%,49%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(236,70%,53%)"></div><div style="background:hsl(240,75%,57%)"></div><div style="background:hsl(244,65%,45%)"></div><div style="background:hsl(228,70%,49%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(236,65%,57%)"></div><div style="background:hsl(240,70%,45%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(228,65%,53%)"></div><div style="background:hsl(232,70%,57%)"></div><div style="background:hsl(236,75%,45%)"></div><div style="background:hsl(240,65%,49%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(228,75%,57%)"></div><div style="background:hsl(232,65%,45%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(240,75%,53%)"></div><div style="background:hsl(244,65%,57%)"></div><div style="background:hsl(228,70%,45%)"></div><div style="background:hsl(232,75%,49%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(232,70%,53%)"></div><div style="background:hsl(236,75%,57%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(244,70%,49%)"></div><div style="background:hsl(228,75%,53%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(240,75%,49%)"></div><div style="background:hsl(244,65%,53%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(240,70%,53%)"></div><div style="background:hsl(244,75%,57%)"></div><div style="background:hsl(228,65%,45%)"></div><div style="background:hsl(232,70%,49%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="subjects band">
+    <div class="wrap">
+      <p class="label muted">What we cover</p>
+      <div class="tags">
+        <span class="tag filled">Business &amp; enterprise</span>
+        <span class="tag">Engineering &amp; STEM</span>
+        <span class="tag">Gaming</span>
+        <span class="tag">Art &amp; design</span>
+        <span class="tag">AQA Unit Award Scheme</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <section id="courses">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label cobalt">Accredited courses</p>
+        <h2 class="section-heading">Courses mapped to the AQA Unit Award Scheme</h2>
+        <p class="section-sub">Everything you need to deliver and evidence a unit: scheme of work, student workbook, marking sheet and outcome tracker. Learners earn an official AQA certificate for every unit they complete, through a registered centre.</p>
+      </div>
+      <div class="grid3">
+        <article class="card">
+          <div class="icon"><div class="on"></div><div class="on"></div><div class="on"></div><div class="on"></div><div></div><div></div><div class="on"></div><div class="on"></div><div class="on"></div></div>
+          <div class="badges"><span class="badge">Business · Level 1</span></div>
+          <h3 class="card-title">Start Your Business</h3>
+          <p class="card-unit">AQA UAS unit 119454 · Business Studies</p>
+          <p class="card-desc">Learners pick one of two businesses, a home bakery or an online padel shop, and run it on paper with a £10,000 budget: concept, pricing, budget, risk and a final verdict.</p>
+          <ul>
+            <li>Interactive workbook that auto-saves and works on any tablet or laptop</li>
+            <li>One-click export of a learner's answers for marking</li>
+            <li>Marking and feedback sheet covering all 8 outcomes</li>
+            <li>Pre-formatted AQA summary sheet</li>
+          </ul>
+          <div class="badges"><span class="badge">Ages 14+</span><span class="badge">5 weeks</span></div>
+          <div class="buy">
+            <span class="price">£39<small>centre licence</small></span>
+            <a class="btn primary sm" href="https://payhip.com/hellopixelmake" data-payhip="start-your-business">Buy on Payhip</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="icon"><div class="on"></div><div class="on"></div><div class="on"></div><div></div><div class="on"></div><div></div><div class="on"></div><div class="on"></div><div class="on"></div></div>
+          <div class="badges"><span class="badge">Business · Entry Level</span></div>
+          <h3 class="card-title">Being an Entrepreneur</h3>
+          <p class="card-unit">AQA UAS unit 122493 · Being an Entrepreneur</p>
+          <p class="card-desc">Ten lessons on what entrepreneurs actually do, from George Cadbury to Madam C.J. Walker, ending with a mini enterprise challenge the class runs themselves.</p>
+          <ul>
+            <li>10-lesson scheme of work with outcome mapping and differentiation</li>
+            <li>20-page A4 student workbook: print-ready PDF plus editable Word</li>
+            <li>Teacher answer key and recap quiz</li>
+            <li>Evidence tracker for the whole group</li>
+          </ul>
+          <div class="badges"><span class="badge">Ages 11+</span><span class="badge">10 lessons</span></div>
+          <div class="buy">
+            <span class="price">£29<small>centre licence</small></span>
+            <a class="btn primary sm" href="https://payhip.com/hellopixelmake" data-payhip="being-an-entrepreneur">Buy on Payhip</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="icon"><div></div><div class="on"></div><div></div><div class="on"></div><div class="on"></div><div class="on"></div><div></div><div class="on"></div><div></div></div>
+          <div class="badges"><span class="badge soon">Engineering · Coming soon</span></div>
+          <h3 class="card-title">Marble Run Engineering</h3>
+          <p class="card-unit">Five bespoke AQA UAS units · Entry Level to Level 1</p>
+          <p class="card-desc">Thirty build challenges across five levels, from a first base plate to a free-designed track that uses every piece in the box. Written in calm, low-demand language for neurodiverse learners.</p>
+          <ul>
+            <li>30 challenge cards, six per level, each with success criteria and a stretch task</li>
+            <li>Tutor handbook, progress tracker and five certificates</li>
+            <li>Verification record for every outcome, ready for submission</li>
+            <li>Self-paced web app for shared tablets</li>
+          </ul>
+          <div class="badges"><span class="badge">Ages 7+</span><span class="badge">For GraviTrax® sets</span></div>
+          <div class="buy">
+            <span class="price">£49<small>centre licence</small></span>
+            <a class="btn ghost sm" href="https://payhip.com/hellopixelmake" data-payhip="marble-run-waitlist">Join the waitlist</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="packs" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label cobalt">At-home packs</p>
+        <h2 class="section-heading">Printable packs for kids who'd rather be building</h2>
+        <p class="section-sub">Download, print and go. Each pack turns something your child already loves into an afternoon of drawing, planning and problem-solving.</p>
+      </div>
+      <div class="packs">
+        <article class="card">
+          <div class="icon"><div class="on"></div><div></div><div class="on"></div><div></div><div class="on"></div><div></div><div class="on"></div><div></div><div class="on"></div></div>
+          <div class="badges"><span class="badge">Ages 6–10</span><span class="badge soon">Launching soon</span></div>
+          <h3 class="card-title">Block World Activity Pack</h3>
+          <p class="card-desc">For kids who love block-building games. Six activity types they can come back to again and again, from designing their own creatures to mapping a whole world.</p>
+          <div class="activities">
+            <div><strong>Creature design</strong>Invent a creature, give it stats and a habitat</div>
+            <div><strong>Build challenge cards</strong>Timed builds with a twist</div>
+            <div><strong>Biome mapping</strong>Plan a world on a grid</div>
+            <div><strong>Game concept sheets</strong>Pitch a game idea like a studio would</div>
+            <div><strong>Pixel art grids</strong>Design sprites square by square</div>
+            <div><strong>Gaming journal</strong>Reflect on what worked and what didn't</div>
+          </div>
+          <div class="buy">
+            <span class="price">£5.99<small>instant PDF</small></span>
+            <a class="btn primary sm" href="https://payhip.com/hellopixelmake" data-payhip="block-world-pack">Buy on Payhip</a>
+          </div>
+        </article>
+        <div class="pack-visual" aria-hidden="true">
+          <div class="pixel-grid"><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(236,75%,53%)"></div><div style="background:hsl(240,65%,57%)"></div><div style="background:hsl(244,70%,45%)"></div><div style="background:hsl(228,75%,49%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(244,65%,49%)"></div><div style="background:hsl(228,70%,53%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(240,70%,49%)"></div><div style="background:hsl(244,75%,53%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(232,70%,45%)"></div><div style="background:hsl(236,75%,49%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(236,70%,53%)"></div><div style="background:hsl(240,75%,57%)"></div><div style="background:hsl(244,65%,45%)"></div><div style="background:hsl(228,70%,49%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(236,65%,57%)"></div><div style="background:hsl(240,70%,45%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(228,65%,53%)"></div><div style="background:hsl(232,70%,57%)"></div><div style="background:hsl(236,75%,45%)"></div><div style="background:hsl(240,65%,49%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(228,75%,57%)"></div><div style="background:hsl(232,65%,45%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(240,75%,53%)"></div><div style="background:hsl(244,65%,57%)"></div><div style="background:hsl(228,70%,45%)"></div><div style="background:hsl(232,75%,49%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(232,70%,53%)"></div><div style="background:hsl(236,75%,57%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(244,70%,49%)"></div><div style="background:hsl(228,75%,53%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(240,75%,49%)"></div><div style="background:hsl(244,65%,53%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:hsl(240,70%,53%)"></div><div style="background:hsl(244,75%,57%)"></div><div style="background:hsl(228,65%,45%)"></div><div style="background:hsl(232,70%,49%)"></div><div style="background:#E8EDFF;opacity:.4"></div><div style="background:#E8EDFF;opacity:.4"></div></div>
+        </div>
+      </div>
+      <p class="more">More packs are on the way across games, business and art. Library members get every new one the day it lands.</p>
+    </div>
+  </section>
+
+  <section id="library">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label cobalt">Pixelmake Library</p>
+        <h2 class="section-heading">Every pack, one small monthly payment</h2>
+      </div>
+      <div class="library-panel">
+        <div class="library-copy">
+          <p class="muted">Every pack we've made and every pack we launch, for one monthly payment. Download what you need, when you need it, and cancel whenever you like.</p>
+          <ul>
+            <li>All current and future activity packs</li>
+            <li>New packs the day they launch, at no extra cost</li>
+            <li>Cancel in one click from your account</li>
+          </ul>
+          <p class="muted" style="font-size:14px">Courses are sold separately as centre licences.</p>
+        </div>
+        <div class="plan">
+          <p class="label cobalt">Opening soon</p>
+          <p class="price">£7.99<small>per month</small></p>
+          <p class="muted" style="font-size:14px">Or £59 a year, four months free.</p>
+          <a class="btn primary" href="https://payhip.com/hellopixelmake" data-payhip="library-waitlist">Join the waitlist</a>
+          <p class="muted" style="font-size:13px">Opens once the first packs have launched. Secure checkout through Payhip.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label cobalt">How it works</p>
+        <h2 class="section-heading">From checkout to certificate</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>Pick a course or pack</h3><p>Pay by card or PayPal through Payhip, with no account to create. Your receipt arrives by email straight away.</p></div>
+        <div class="step"><h3>Download instantly</h3><p>Your files arrive by email and sit in your Payhip library for whenever you need them again. Word files are editable; PDFs are print-ready.</p></div>
+        <div class="step"><h3>Deliver it your way</h3><p>Add your centre's name, adjust the wording for your learners, print it or run it on tablets. Nothing is locked.</p></div>
+        <div class="step"><h3>Claim the certificates</h3><p>For courses, your AQA-registered centre checks the evidence and submits the unit. AQA posts the certificates to the centre.</p></div>
+      </div>
+      <div class="note">
+        <strong>Pixelmake is not an AQA centre.</strong> Courses are mapped to Unit Award Scheme outcomes so that a registered centre can award them. Home educators can go through a registered centre (many small providers offer this for a yearly fee) or simply use the materials without certification.
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label cobalt">FAQ</p>
+        <h2 class="section-heading">Questions, answered</h2>
+      </div>
+      <div class="faq">
+        <details><summary>What is the AQA Unit Award Scheme?</summary><p>A way for AQA, England's largest exam board, to recognise small steps of learning without exams. Every completed unit earns an official certificate listing exactly what the learner can now do. It's widely used in SEN settings, alternative provision and home education.</p></details>
+        <details><summary>Can we use the courses at home?</summary><p>Yes. Everything works at the kitchen table. If you want the AQA certificate at the end, the evidence needs to be checked and submitted by a registered centre.</p></details>
+        <details><summary>Do we need a GraviTrax set for the marble-run course?</summary><p>Yes. The Starter Set covers Levels 1 to 3. Action tiles and expansion sets open up Levels 4 and 5, though the cards are written so you can swap in whatever pieces you own.</p></details>
+        <details><summary>What format are the files?</summary><p>Printables come as PDF and editable Word (.docx). The Start Your Business workbook is a single file that opens in any browser and works offline, so it runs on school tablets without an install.</p></details>
+        <details><summary>What does "centre licence" mean?</summary><p>One price covers your whole centre, or your whole household, with as many learners as you like. Please don't pass files between organisations; a second licence costs less than a coffee a week.</p></details>
+        <details><summary>What's your refund policy?</summary><p>Digital files can't be returned once downloaded, so do read the full contents list first. If a file is faulty or won't open, email us and we'll put it right.</p></details>
+      </div>
+      <div class="contact">
+        <span class="label cobalt">Contact</span>
+        <code id="email">hellopixelmake@gmail.com</code>
+        <button class="btn ghost sm" id="copyBtn" type="button">Copy</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="lockup">
+    <div class="wrap">
+      <span class="wordmark"><span class="pixel">pixel</span><span class="make">make</span></span>
+      <p>Learn it. Build it. Own it.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="wordmark" href="#top"><span class="pixel">pixel</span><span class="make">make</span></a>
+    <p>© <span id="year">2026</span> Pixelmake. All rights reserved.</p>
+    <p>Pixelmake is independent. GraviTrax® is a registered trademark of Ravensburger. AQA and the Unit Award Scheme are trademarks of AQA Education. Pixelmake is not affiliated with or endorsed by either.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  var btn = document.getElementById('copyBtn');
+  btn.addEventListener('click', function(){
+    var text = document.getElementById('email').textContent;
+    var done = function(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy'; }, 1600); };
+    var fallback = function(){
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('email'));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else { fallback(); }
+  });
+</script>
+</body>
+</html>
